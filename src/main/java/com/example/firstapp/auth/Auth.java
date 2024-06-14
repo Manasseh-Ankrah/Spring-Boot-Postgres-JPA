@@ -3,6 +3,8 @@ package com.example.firstapp.auth;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import org.hibernate.validator.constraints.Email;
 
 @Entity
 @Table
@@ -20,12 +22,25 @@ public class Auth {
 
     @JsonIgnore
     Long id;
+
+    @NotBlank(message = "Name is a required field!")
     String name;
+
+    @NotBlank
+    @Email
+//    @Email(message = "Email is a required field!")
     String email;
+
+    @NotBlank(message = "Phone is a required field!")
     String phone;
+
+    @NotBlank(message = "Password is a required field!")
     String password;
     @Transient
+    @NotBlank(message = "Confirm Password is a required field!")
     String confirmPassword;
+
+    @NotBlank(message = "Role is a required field!")
     String role;
 
     // Constructors
@@ -93,9 +108,9 @@ public class Auth {
         this.confirmPassword = confirmPassword;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
+//    public String getConfirmPassword() {
+//        return confirmPassword;
+//    }
 
     public void setRole(String role) {
         this.role = role;

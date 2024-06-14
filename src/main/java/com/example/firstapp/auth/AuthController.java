@@ -2,8 +2,10 @@ package com.example.firstapp.auth;
 
 
 import com.example.firstapp.dto.CustomResponse;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.net.URISyntaxException;
@@ -26,7 +28,7 @@ public class AuthController {
     }
 
     @PostMapping(path = "register")
-    public ResponseEntity<CustomResponse> registerUser(@RequestBody Auth payload) throws URISyntaxException {
+    public ResponseEntity<CustomResponse> registerUser(@Valid @RequestBody Auth payload) throws URISyntaxException {
 
         Auth result = authService.registerUser(payload);
         CustomResponse response = new CustomResponse(result,"Registration Successful!");

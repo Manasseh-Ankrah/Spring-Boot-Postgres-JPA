@@ -1,30 +1,40 @@
-package com.example.firstapp.exceptions;
+package com.example.firstapp.exceptions.api;
 
 import org.springframework.http.HttpStatus;
 
 import java.time.ZonedDateTime;
+import java.util.List;
 
 public class ApiException {
-    private final String message;
 
     private final HttpStatus httpStatus;
     private final int code;
 
+    private List<String> message;
+
     private final ZonedDateTime timestamp;
 
-    public ApiException(String message,int code, HttpStatus httpStatus, ZonedDateTime timestamp) {
+    public ApiException( int code, HttpStatus httpStatus, List<String> message, ZonedDateTime timestamp) {
+        this.code = code;
         this.message = message;
+        this.httpStatus = httpStatus;
+        this.timestamp = timestamp;
+    }
+
+    public ApiException( int code, HttpStatus httpStatus, ZonedDateTime timestamp) {
         this.code = code;
         this.httpStatus = httpStatus;
         this.timestamp = timestamp;
     }
 
-    public String getMessage() {
-        return message;
-    }
+
 
     public HttpStatus getHttpStatus() {
         return httpStatus;
+    }
+
+    public List<String> getMessage() {
+        return message;
     }
 
     public int getCode() {

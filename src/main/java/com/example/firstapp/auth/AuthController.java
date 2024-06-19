@@ -35,7 +35,6 @@ public class AuthController {
         URI location = new URI("/api/v1/auth/register/" + result.getId());
         return ResponseEntity.created(location).body(response);
     }
-
 }
 
 

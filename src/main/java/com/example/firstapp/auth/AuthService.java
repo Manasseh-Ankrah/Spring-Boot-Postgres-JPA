@@ -29,14 +29,6 @@ public class AuthService {
 
         List<String> roles = List.of("admin","user");
 
-
-
-        // Validate all entries
-//        if (payload.getName() == null || payload.getEmail() == null || payload.getPhone() == null || payload.getPassword() == null || payload.confirmPassword == null|| payload.getRole() == null) {
-//            throw  new ApiRequestException("All fields are required!", badRequest.value(), badRequest);
-//        }
-
-
         Optional<Auth> userOptional = authRepository.findUserByEmail(payload.getEmail());
 
 

@@ -23,8 +23,8 @@ public class Auth {
     @JsonIgnore
     Long id;
 
-    @NotBlank(message = "Name is a required field!")
-    String name;
+    @NotBlank(message = "Username is a required field!")
+    String username;
 
     @NotBlank
     @Email
@@ -45,17 +45,17 @@ public class Auth {
 
     // Constructors
     public Auth(){}
-    public Auth(Long id,String name, String email,String phone,String password,String confirmPassword,String role){
+    public Auth(Long id, String username, String email, String phone, String password, String confirmPassword, String role){
         this.id = id;
-        this.name = name;
+        this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.confirmPassword = confirmPassword;
         this.role = role;
     }
-    public Auth(String name, String email,String phone,String password,String confirmPassword,String role){
-        this.name = name;
+    public Auth(String username, String email, String phone, String password, String confirmPassword, String role){
+        this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
@@ -72,12 +72,12 @@ public class Auth {
         return id;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
     public void setEmail(String email) {
@@ -124,7 +124,7 @@ public class Auth {
     public String toString() {
         return "Student{" +
                 "id" + id +
-                ", name='" + name + '\'' +
+                ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +

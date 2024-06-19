@@ -1,7 +1,10 @@
 package com.example.firstapp.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import org.hibernate.validator.constraints.Email;
 import java.time.LocalDate;
 import java.time.Period;
 
@@ -12,9 +15,16 @@ public class Student {
     @SequenceGenerator(name = "student_sequence", sequenceName = "student_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "student_sequence")
 
+    @JsonIgnore
     private Long id;
+
+    @NotBlank(message = "Name is a required field!")
     private String name;
+    @NotBlank
+    @Email
     private String email;
+
+    @NotNull(message = "Date of birth is a required field!")
     private LocalDate dob;
     @Transient
     private Integer age;

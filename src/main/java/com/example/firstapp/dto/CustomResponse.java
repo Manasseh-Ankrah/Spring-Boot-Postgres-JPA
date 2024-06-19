@@ -1,34 +1,30 @@
 package com.example.firstapp.dto;
 
 
-import com.example.firstapp.auth.Auth;
 
-public class CustomResponse {
+public class CustomResponse<T> {
     String message;
-    Auth result;
-    public CustomResponse( Auth result,String message) {
+    T result;
+    public CustomResponse(T result,String message) {
         this.result = result;
         this.message = message;
-
-        System.out.println("user => " + result + "Message => " + message);
     }
 
 
 
     public void setMessage(String message) {
         this.message = message;
-
     }
 
     public String getMessage() {
         return message;
     }
 
-    public void setResult(Auth result) {
+    public void setResult(T result) {
         this.result = result;
     }
 
-    public Auth getResult() {
+    public T getResult() {
         return result;
     }
 }

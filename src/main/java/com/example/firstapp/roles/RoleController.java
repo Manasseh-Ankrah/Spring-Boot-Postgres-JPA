@@ -21,7 +21,6 @@ public class RoleController {
         this.roleService = roleService;
     }
 
-
     @GetMapping
     public List<Role> fetchAllRoles() {
         return roleService.getAllRoles();
@@ -55,7 +54,6 @@ public class RoleController {
 
     @GetMapping(path = "{roleId}")
     public ResponseEntity<CustomResponse> fetchRole(@PathVariable(required = true) Long roleId) throws URISyntaxException{
-
         Role result = roleService.getRole(roleId);
         CustomResponse response = new CustomResponse<>(result,"Single role retrieved successfully!");
         URI location = new URI("/api/vq/roles" + result.getId());

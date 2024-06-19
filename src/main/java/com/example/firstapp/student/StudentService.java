@@ -42,7 +42,7 @@ public class StudentService {
 
 
 //    @Transactional
-    public void updateStudent(Long studentId,String name, String email) {
+    public Student updateStudent(Long studentId,String name, String email) {
 
         //  retrieving student data and throwing an error when data does not exist
          Student student = studentRepository.findById(studentId).orElseThrow(() ->  new ApiRequestException("Student with id " + studentId + " does not exist"));
@@ -63,5 +63,13 @@ public class StudentService {
             student.setEmail(email);
         }
 
+        return student;
+    }
+
+
+    public Student getStudent(Long studentId) {
+
+        Student student = studentRepository.findById(studentId).orElseThrow(()-> new ApiRequestException("Student with id " + studentId + " does not exist"));
+        return student;
     }
 }

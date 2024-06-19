@@ -29,7 +29,6 @@ public class StudentController {
     @PostMapping
 
     public ResponseEntity<CustomResponse> registerNewStudent(@Valid @RequestBody Student student) throws URISyntaxException {
-
         Student result = studentService.addNewStudent(student);
         CustomResponse response = new CustomResponse(result,"Registration Successful!");
         URI location = new URI("/api/v1/students/" + result.getId());
@@ -37,21 +36,39 @@ public class StudentController {
     }
 
 
-
-
-
-
     @DeleteMapping(path = "{studentId}")
-    public void deleteStudent(@PathVariable("studentId") Long studentId ) {
+    public ResponseEntity<CustomResponse> deleteStudent(@PathVariable("studentId") Long studentId ) throws URISyntaxException {
         studentService.deleteStudent(studentId);
+
+        CustomResponse response = new CustomResponse("Deleted student Successful!");
+        URI location = new URI("/api/v1/students/");
+        return ResponseEntity.created(location).body(response);
     }
 
     @PutMapping(path = "{studentId}")
-    public void updateStudent(
+    public ResponseEntity<CustomResponse> updateStudent(
             @PathVariable("studentId") Long studentId,
             @RequestParam(required = true) String name,
             @RequestParam(required = true) String email
-    ) {
-        studentService.updateStudent(studentId,name,email);
+    ) throws URISyntaxException {
+        Student result = studentService.updateStudent(studentId,name,email);
+
+        CustomResponse response = new CustomResponse(result,"Updated student Successfully!");
+        URI location = new URI("/api/v1/students/");
+        return ResponseEntity.created(location).body(response);
     }
+
+
+    @GetMapping("{studentId}")
+    public ResponseEntity<CustomResponse> getStudent(@PathVariable(required = true) Long studentId) throws URISyntaxException{
+       Student result = studentService.getStudent(studentId);
+      CustomResponse response = new CustomResponse<>(result,"Retrieved single student successfully!");
+      URI location = new URI("/api/v1/students" + result.getId());
+
+      return ResponseEntity.created(location).body(response);
+    }
+
+
+
+
 }

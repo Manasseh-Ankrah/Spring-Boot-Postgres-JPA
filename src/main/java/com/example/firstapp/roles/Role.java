@@ -7,12 +7,11 @@ import jakarta.validation.constraints.NotEmpty;
 @Table
 @Entity(name = "role")
 public class Role {
-
     @Id
     @SequenceGenerator(name = "role_sequence",sequenceName = "role_sequence",allocationSize = 1)
     @GeneratedValue(generator = "role_sequence",strategy = GenerationType.IDENTITY)
 
-    @JsonIgnore
+//    @JsonIgnore
     private Long id;
 
     @NotEmpty(message = "Name is a required field!")

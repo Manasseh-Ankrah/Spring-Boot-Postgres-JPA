@@ -27,10 +27,6 @@ public class StudentController {
 
 
     @PostMapping
-//    public void registerNewStudent( @RequestBody Student Student) {
-//         studentService.addNewStudent(Student);
-//    }
-
 
     public ResponseEntity<CustomResponse> registerNewStudent(@Valid @RequestBody Student student) throws URISyntaxException {
 

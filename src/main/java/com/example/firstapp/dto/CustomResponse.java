@@ -1,11 +1,19 @@
 package com.example.firstapp.dto;
 
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomResponse<T> {
     String message;
     T result;
-    public CustomResponse(T result,String message) {
+
+
+    public CustomResponse(String message) {
+        this.message = message;
+    }
+
+    public CustomResponse(T result, String message) {
         this.result = result;
         this.message = message;
     }

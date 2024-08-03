@@ -18,8 +18,6 @@ public class CustomResponse<T> {
         this.message = message;
     }
 
-
-
     public void setMessage(String message) {
         this.message = message;
     }

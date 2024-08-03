@@ -56,7 +56,7 @@ public class RoleController {
     public ResponseEntity<CustomResponse> fetchRole(@PathVariable(required = true) Long roleId) throws URISyntaxException{
         Role result = roleService.getRole(roleId);
         CustomResponse response = new CustomResponse<>(result,"Single role retrieved successfully!");
-        URI location = new URI("/api/vq/roles" + result.getId());
+        URI location = new URI("/api/v1/roles" + result.getId());
         return ResponseEntity.created(location).body(response);
     }
 }

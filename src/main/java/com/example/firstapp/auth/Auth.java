@@ -1,10 +1,14 @@
 package com.example.firstapp.auth;
 
 
+import com.example.firstapp.roles.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import org.hibernate.validator.constraints.Email;
+
+import java.util.ArrayList;
+import java.util.Collection;
 
 @Entity
 @Table
@@ -28,7 +32,6 @@ public class Auth {
 
     @NotBlank
     @Email
-//    @Email(message = "Email is a required field!")
     String email;
 
     @NotBlank(message = "Phone is a required field!")
@@ -40,27 +43,34 @@ public class Auth {
     @NotBlank(message = "Confirm Password is a required field!")
     String confirmPassword;
 
-    @NotBlank(message = "Role is a required field!")
-    String role;
+//    @NotBlank(message = "Role is a required field!")
+//    String role;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Collection<Role> roles = new ArrayList<>();
+
+    @Transient
+    @NotBlank(message = "Role Id a required field!")
+    String roleId;
 
     // Constructors
     public Auth(){}
-    public Auth(Long id, String username, String email, String phone, String password, String confirmPassword, String role){
+    public Auth(Long id, String username, String email, String phone, String password, String confirmPassword, Collection roles){
         this.id = id;
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.role = role;
+         this.roles = roles;
     }
-    public Auth(String username, String email, String phone, String password, String confirmPassword, String role){
+    public Auth(String username, String email, String phone, String password, String confirmPassword, Collection roles){
         this.username = username;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.confirmPassword = confirmPassword;
-        this.role = role;
+         this.roles = roles;
     }
 
     // Getters and Setters
@@ -108,16 +118,17 @@ public class Auth {
         this.confirmPassword = confirmPassword;
     }
 
-//    public String getConfirmPassword() {
-//        return confirmPassword;
-//    }
-
-    public void setRole(String role) {
-        this.role = role;
+    public void setRole(Collection role) {
+        this.roles = role;
     }
 
-    public String getRole() {
-        return role;
+    public Collection getRole() {
+        return roles;
+    }
+
+
+    public void setRoleId(String roleId) {
+        this.roleId = roleId;
     }
 
     @Override
@@ -129,7 +140,7 @@ public class Auth {
                 ", phone='" + phone + '\'' +
                 ", password='" + password + '\'' +
 //                ", confirmPassword='" + confirmPassword  +
-                ", role='" + role +
+                ", role='" + roles +
                 '}';
     }
 }
